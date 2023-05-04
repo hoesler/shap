@@ -611,7 +611,22 @@ class TreeEnsemble:
             "binary": "log_odds"
         }
 
-        if type(model) is dict and "trees" in model:
+        if isinstance(model, TreeEnsemble):
+            self.model_type = model.model_type
+            self.trees = model.trees
+            self.base_offset = model.base_offset
+            self.model_output = model.model_output
+            self.objective = model.objective
+            self.tree_output = model.tree_output
+            self.internal_dtype = model.internal_dtype
+            self.input_dtype = model.internal_dtype
+            self.data = model.data
+            self.data_missing = model.data_missing
+            self.fully_defined_weighting = model.fully_defined_weighting
+            self.tree_limit = model.tree_limit
+            self.num_stacked_models = model.num_stacked_models
+            self.cat_feature_indices = model.cat_feature_indices
+        elif type(model) is dict and "trees" in model:
             # This allows a dictionary to be passed that represents the model.
             # this dictionary has several numerica paramters and also a list of trees
             # where each tree is a dictionary describing that tree

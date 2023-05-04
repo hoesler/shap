@@ -3,6 +3,7 @@
 
 # pylint: disable=missing-function-docstring
 import pickle
+
 import shap
 from . import common
 
@@ -38,6 +39,10 @@ def test_tabular_multi_output_independent_masker():
 def test_serialization():
     model, data = common.basic_xgboost_scenario()
     common.test_serialization(shap.explainers.Exact, model.predict, data, data)
+
+def test_tree_serialization():
+    model, data = common.basic_xgboost_scenario()
+    common.test_serialization(shap.explainers.Tree, model, data, data)
 
 def test_serialization_no_model_or_masker():
     model, data = common.basic_xgboost_scenario()
